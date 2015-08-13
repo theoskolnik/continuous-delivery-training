@@ -1,0 +1,65 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url "http://dl.bintray.com/robfletcher/gradle-plugins" }
+    }
+
+    dependencies {
+        classpath "com.github.rholder:gradle-one-jar:1.0.4"
+    }
+}
+
+apply plugin: "idea"
+apply plugin: "java"
+apply plugin: "application"
+apply plugin: "gradle-one-jar"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+[compileJava]*.options*.encoding = "UTF-8"
+
+project.ext {
+    mainClassName = "com.thoughtworks.SampleApplication"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.sparkjava:spark-core:2.2'
+    compile 'org.seleniumhq.selenium:selenium-java:2.44.0'
+    compile 'org.seleniumhq.selenium:selenium-chrome-driver:2.44.0'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'org.apache.commons:commons-compress:1.9'
+    compile 'commons-configuration:commons-configuration:1.10'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.5.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.1'
+    compile 'org.json:json:20090211'
+    compile 'joda-time:joda-time:2.3'
+    compile fileTree(dir: 'libs', include: '*.jar')
+    compile 'org.jsoup:jsoup:1.8.1'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:2.0.0'
+    testCompile 'org.mockito:mockito-all:1.10.19'
+
+}
+
+task oneJar(type: OneJar) {
+    mainClass = mainClassName
+    archiveName = 'sampleapplication.jar'
+}
+
+task runAllTests(type: Test, dependsOn: testClasses) {
+    include 'com/tw/**'
+}
+
+artifacts {
+    oneJar
+}
