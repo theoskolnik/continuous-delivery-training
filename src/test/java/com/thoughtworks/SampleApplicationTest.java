@@ -2,11 +2,12 @@ package com.thoughtworks;
 
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SampleApplicationTest {
     @Test
     public void shouldTestSomething() {
-        assertThat(true).isEqualTo(true);
+        assertThat(true, is(true));
     }
 }
