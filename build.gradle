@@ -60,6 +60,8 @@ task runAllTests(type: Test, dependsOn: testClasses) {
     include 'com/tw/**'
 }
 
+task stage(dependsOn: [clean, oneJar])
+
 artifacts {
     oneJar
 }
