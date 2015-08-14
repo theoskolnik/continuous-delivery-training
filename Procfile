@@ -1,1 +1,1 @@
-web: sh build-and-deploy-scripts/run-webapp.sh
+web: sh build-and-deploy-scripts/run-webapp.sh -p 4567
