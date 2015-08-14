@@ -1,0 +1,1 @@
+web: sh build-and-deploy-scripts/run-webapp.sh
